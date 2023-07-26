@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const { FORMERR } = require('dns');
 
 inquirer
     .prompt([
@@ -27,44 +28,48 @@ inquirer
     ])
     .then((response) => {   
 
-        // I can likely use this switch case structure for the shape selector
-    switch (response.license) {
-        case 'Apache License 2.0':
-            var chosenLicenseLink = "[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)";
-            projectLicense = 'Apache License 2.0';
+    const fontColor = response.textcolor;
+    const shapeColor = response.shapeColor;
+    const logoText = response.logoText;
+
+    if (logoText.length < 1 || logoText.length > 3) {
+        console.log("You have not selected the correct number of characters. You may choose up to 3.");
+        return;
+    };
+
+    switch (response.selectedShape) {
+        case 'circle':
+            const chosenCircle = new Circle (shapeColor, fontColor, logoText);
+            console.log(chosenCircle);
             break;
-        case 'MIT License':
-            var chosenLicenseLink = "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)";
-            projectLicense = 'MIT License';
+        case 'triangle':
+            var chosenShape = `<svg height="200" width="300">
+    <polygon points="100,10 0,200 200,200" fill="${shapeColor}"/>
+    <text x="60" y="140" fill="${fontColor}" font-size="3rem">${logoText}</text>
+</svg>`
             break;
-        case 'Creative Commons Zero v1.0 Universal':
-            var chosenLicenseLink = "[![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)";
-            projectLicense = 'Creative Commons Zero v1.0 Universal';
-            break;
-        case 'Mozilla Public License 2.0':
-            var chosenLicenseLink = "[![License: MPL 2.0](https://img.shields.io/badge/License-MPL_2.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)";
-            projectLicense = 'Mozilla Public License 2.0';
+        case 'square':
+            var chosenShape = `<svg width="300" height="200">
+            <rect width="200" height="200" fill="${shapeColor}"/>
+            <text x="50" y="110" fill="${fontColor}" font-size="3rem">${logoText}</text>
+        </svg>`
     }
 
-    const filename = `${response.title.toLowerCase()}.md`;
-    const projectTitle = response.title;
-    const descrMotiv = response.descriptionMotivation;
-    const descrSolvProb = response.descriptionSolvedProblem;
-    const descrLearned = response.descriptionLearned;
-    const projectInstallation = response.installation;
-    const projectUsage = response.usage;
-    const licenseBadge = chosenLicenseLink;
-    const licenseChosen = projectLicense;
-    const projectContributions = response.contributing;
-    const projectTests= response.tests;
-    const gitHubUser = response.githubUsername;
-    const userEmail = response.email;
+    // const descrLearned = response.descriptionLearned;
+    // const projectInstallation = response.installation;
+    // const projectUsage = response.usage;
+    // const licenseBadge = chosenLicenseLink;
+    // const licenseChosen = projectLicense;
+    // const projectContributions = response.contributing;
+    // const projectTests= response.tests;
+    // const gitHubUser = response.githubUsername;
+    // const userEmail = response.email;
 
-    convertToHTML(logotext)
+    convertToHTML(chosenShape)
     });
 
-function convertToHTML(logotext) {
-    var htmlVersion = `<!DOCTYPE html>
+function convertToHTML(chosenShape) {
+    var svgVersion = `<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -72,16 +77,16 @@ function convertToHTML(logotext) {
         <title>Document</title>
     </head>
     <body>
-        
+        ${chosenShape}
     </body>
     </html>`;
 
-    writeToReadMe (filename, markdownVersion);
+    writeToSVG (svgVersion);
 };
 
-function writeToReadMe (filename, markdownVersion) {
-    fs.writeFile(filename, (markdownVersion), (err) =>
-    err ? console.log(err) : console.log('Success!')
+function writeToSVG (svgVersion) {
+    fs.writeFile(logo.svg, (svgVersion), (err) =>
+    err ? console.log(err) : console.log('Generated logo.svg')
     );
 }
 
