@@ -43,16 +43,10 @@ inquirer
             console.log(chosenCircle);
             break;
         case 'triangle':
-            var chosenShape = `<svg height="200" width="300">
-    <polygon points="100,10 0,200 200,200" fill="${shapeColor}"/>
-    <text x="60" y="140" fill="${fontColor}" font-size="3rem">${logoText}</text>
-</svg>`
+            
             break;
         case 'square':
-            var chosenShape = `<svg width="300" height="200">
-            <rect width="200" height="200" fill="${shapeColor}"/>
-            <text x="50" y="110" fill="${fontColor}" font-size="3rem">${logoText}</text>
-        </svg>`
+
     }
 
     // const descrLearned = response.descriptionLearned;
