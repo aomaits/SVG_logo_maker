@@ -42,6 +42,7 @@ inquirer
             console.log('this is the fontColor var= ' + fontColor)
             console.log('this is the logoText var= ' + logoText)
             console.log('this is the chosenCircle object= ' + chosenCircle)
+            convertToHTML(chosenCircle);
             break;
         case 'triangle':
             const chosenTriangle = new Triangle (shapeColor, fontColor, logoText);
@@ -68,27 +69,27 @@ inquirer
 
 
 
-// function convertToHTML(chosenShape) {
-//     var svgVersion = `<!DOCTYPE html>
-//     <html lang="en">
-//     <head>
-//         <meta charset="UTF-8">
-//         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-//         <title>Document</title>
-//     </head>
-//     <body>
-//         ${chosenShape}
-//     </body>
-//     </html>`;
+function convertToHTML(chosenShape) {
+    var logoRender = `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        ${chosenShape.getHTML()}
+    </body>
+    </html>`;
 
-//     writeToSVG (svgVersion);
-// };
+    writeToSVG (logoRender);
+};
 
-// function writeToSVG (svgVersion) {
-//     fs.writeFile('Example.svg', (svgVersion), (err) =>
-//     err ? console.log(err) : console.log('Generated logo.svg')
-//     );
-// }
+function writeToSVG (svgVersion) {
+    fs.writeFile('Example.svg', (svgVersion), (err) =>
+    err ? console.log(err) : console.log('Generated logo.svg')
+    );
+}
 
 function init() {
     
