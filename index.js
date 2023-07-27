@@ -54,39 +54,18 @@ inquirer
             break;
 
     }
-    
-
-    // const descrLearned = response.descriptionLearned;
-    // const projectInstallation = response.installation;
-    // const projectUsage = response.usage;
-    // const licenseBadge = chosenLicenseLink;
-    // const licenseChosen = projectLicense;
-    // const projectContributions = response.contributing;
-    // const projectTests= response.tests;
-    // const gitHubUser = response.githubUsername;
-    // const userEmail = response.email;
     });
 
 
 
 function convertToHTML(chosenShape) {
-    var logoRender = `<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
-        ${chosenShape.getHTML()}
-    </body>
-    </html>`;
+    var logoRender = chosenShape.getHTML();
 
     writeToSVG (logoRender);
 };
 
-function writeToSVG (svgVersion) {
-    fs.writeFile('Example.svg', (svgVersion), (err) =>
+function writeToSVG (logoRender) {
+    fs.writeFile('Example.svg', (logoRender), (err) =>
     err ? console.log(err) : console.log('Generated logo.svg')
     );
 }
