@@ -1,6 +1,8 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const { FORMERR } = require('dns');
+const Circle = require('../SVG_logo_maker/lib/circle');
+const Triangle = require('../SVG_logo_maker/lib/triangle');
+const Square = require('../SVG_logo_maker/lib/square');
 
 inquirer
     .prompt([
@@ -28,26 +30,30 @@ inquirer
     ])
     .then((response) => {   
 
-    const fontColor = response.textcolor;
+    const fontColor = response.textColor;
     const shapeColor = response.shapeColor;
     const logoText = response.logoText;
 
-    if (logoText.length < 1 || logoText.length > 3) {
-        console.log("You have not selected the correct number of characters. You may choose up to 3.");
-        return;
-    };
-
     switch (response.selectedShape) {
         case 'circle':
-            const chosenCircle = new Circle (shapeColor, fontColor, logoText);
-            console.log(chosenCircle);
+            const chosenCircle = new Circle(shapeColor, fontColor, logoText);
+            // convertToHTML(chosenCircle);
+            console.log('this is the shapeColor var= ' + shapeColor)
+            console.log('this is the fontColor var= ' + fontColor)
+            console.log('this is the logoText var= ' + logoText)
+            console.log('this is the chosenCircle object= ' + chosenCircle)
             break;
         case 'triangle':
-            
+            const chosenTriangle = new Triangle (shapeColor, fontColor, logoText);
+            convertToHTML(chosenTriangle);
             break;
         case 'square':
+            const chosenSquare = new Square (shapeColor, fontColor, logoText);
+            convertToHTML(chosenSquare);
+            break;
 
     }
+    
 
     // const descrLearned = response.descriptionLearned;
     // const projectInstallation = response.installation;
@@ -58,36 +64,34 @@ inquirer
     // const projectTests= response.tests;
     // const gitHubUser = response.githubUsername;
     // const userEmail = response.email;
-
-    convertToHTML(chosenShape)
     });
 
-function convertToHTML(chosenShape) {
-    var svgVersion = `<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-    </head>
-    <body>
-        ${chosenShape}
-    </body>
-    </html>`;
 
-    writeToSVG (svgVersion);
-};
 
-function writeToSVG (svgVersion) {
-    fs.writeFile(logo.svg, (svgVersion), (err) =>
-    err ? console.log(err) : console.log('Generated logo.svg')
-    );
-}
+// function convertToHTML(chosenShape) {
+//     var svgVersion = `<!DOCTYPE html>
+//     <html lang="en">
+//     <head>
+//         <meta charset="UTF-8">
+//         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+//         <title>Document</title>
+//     </head>
+//     <body>
+//         ${chosenShape}
+//     </body>
+//     </html>`;
 
-// TODO: Create a function to initialize app
+//     writeToSVG (svgVersion);
+// };
+
+// function writeToSVG (svgVersion) {
+//     fs.writeFile('Example.svg', (svgVersion), (err) =>
+//     err ? console.log(err) : console.log('Generated logo.svg')
+//     );
+// }
+
 function init() {
     
 }
 
-// Function call to initialize app
 init();
