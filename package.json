@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^4.1.1",
     "fs": "^0.0.1-security",
     "jest": "^29.6.1"
   }
