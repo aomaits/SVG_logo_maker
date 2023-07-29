@@ -34,6 +34,11 @@ To view the SVG, a user can then view the output by inserting the SVG contents i
 ![alt text](/assets/renderedImage.jpg)
 
 
+------------------------------------------------
+
+To see a video of the application in action, [click here](https://drive.google.com/file/d/1mo8g1AAdpTmBGC9B3RGSIydNP03i7fOj/view). 
+
+
 ## Credits
 The following NPM node packages were used in this project:
 - [chalk](https://www.npmjs.com/package/chalk)
