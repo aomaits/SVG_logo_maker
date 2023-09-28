@@ -3,6 +3,8 @@
 ## Description
 This javascript-driven application allows a user to create their own logo and write it to an SVG (Scalable Vector Graphics) file. 
 
+This project allowed me to practice testing with Jest and using Inquirer to write an interactive command-line prompt. 
+
 ## Table of Contents
 
 - [Installation](#installation)
